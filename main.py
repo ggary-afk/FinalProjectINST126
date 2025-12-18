@@ -31,10 +31,9 @@ for position in user_lock.split():
     if index < 0 or index >= len(hand):
         print(f"warning {number} is not a position in your hand")
         continue
+    value = hand[index]
+    locked_dice.append(value)
 
-#append the value
-value = hand[index]
-locked_dice.append(value)
   
 #print the message
 print("you locked", locked_dice)
@@ -49,5 +48,20 @@ print("new white dice", hand)
 print("crow die", crow_die)
 print("locked dice", locked_dice)
 
+#build the crow rule
+
+if crow_die == 12:
+    print("You rolled a 12 on the crow die, you've busted!")
+
+#Account for other numbers on the crow die
+else:
+    survivors = []
+    for die in hand:
+        if die == crow_die:
+            print(f"The crow die you rolled is {crow_die} and it eliminates your white {die} ")
+        else:
+            survivors.append(die)
+    hand = survivors
+print("Your remaining white dice", hand)
 
 
