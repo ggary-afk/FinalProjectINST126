@@ -27,9 +27,18 @@ for position in user_lock.split():
 
     index = number- 1
 
-    value = hand[index]
-    locked_dice.append(value)
+#raise an issue if the user types in an incorrect number
+    if index < 0 or index >= len(hand):
+        print(f"warning {number} is not a position in your hand")
+        continue
+
+#append the value
+value = hand[index]
+locked_dice.append(value)
+  
+#print the message
 print("you locked", locked_dice)
+
 #calculate the size of the roll 
 dice_to_roll = len(hand) - len(locked_dice) + 2
 #roll the new dice
