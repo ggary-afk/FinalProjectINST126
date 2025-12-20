@@ -3,6 +3,7 @@
 #Import random module to give us our random number 
 
 import random
+import time
 def roll_white_dice(amount):
     rolls=[]
     for i in range(amount):
@@ -30,8 +31,43 @@ def check_for_sets(current_dice):
             print(f"You can score a set of {number_check}s total dice: {total_count}")
             found_valid_set = True
 
-    if found_valid_set == False:
-        print("No valid sets found")
+        if found_valid_set == False:
+            print("No valid sets found")
+def check_for_runs(current_dice):
+    print(f"Checking for Runs 9 in {current_dice}")
+
+    wild_count = 0
+    for die in current_dice:
+        if die == 12:
+            wild_count = wild_count + 1
+
+    found_run = False
+
+    for start_number in range(1,12):
+        current_streak = 0 
+        placeholder_wild = wild_count
+        run_numbers = []
+        for next_num in range(start_number, 12):
+            has_number = False
+            for die in current_dice:
+                if die == next_num:
+                    has_number = True
+
+            if has_number:
+                current_streak = current_streak +1 
+                run_numbers.append(next_num)
+                
+            elif placeholder_wild > 0:
+                    current_streak = current_streak + 1 
+                    placeholder_wild = placeholder_wild - 1
+                    run_numbers.append (f"{next_num}wild")
+            else:
+                break
+        if current_streak >= 3:
+            print(f"You have a run that starts at {start_number}: {run_numbers}")
+            found_run = True
+        if found_run ==  False:
+            print("No runs found")
 hand = roll_white_dice(3)
 locked_dice = []
 roll_count = 1
@@ -44,9 +80,9 @@ while roll_count <4:
 
     user_choice = input("Type in roll if you want to keep rolling or score if you want to stop:")
     if user_choice == 'score':
-        print("chose to score")
+        print("Chose to score")
         all_dice = hand + locked_dice
-        print("final dice to score:",all_dice)
+        print("Final dice to score:",all_dice)
 #Count the wilds
         wild_count = 0
         for die in all_dice:
@@ -71,7 +107,7 @@ while roll_count <4:
     #locking dice
     #show the user their hand
 
-    user_lock = input("Which dice would you like to lock? write like (1 3)")
+    user_lock = input("Which dice would you like to lock? Type the position of the dice in your hand like 1 or 2:")
     for position in user_lock.split():
         number = int(position)
 
@@ -79,24 +115,28 @@ while roll_count <4:
 
     #raise an issue if the user types in an incorrect number
         if index < 0 or index >= len(hand):
-            print(f"warning {number} is not a position in your hand")
+            print(f"Warning {number} is not a position in your hand")
             continue
         value = hand[index]
         locked_dice.append(value)
 
     
     #print the message
-    print("you locked", locked_dice)
+    print("You locked", locked_dice)
 
     #calculate the size of the roll 
     dice_to_roll = len(hand) - len(locked_dice) + 2
+    print("\nRolling dice...")
+    time.sleep(3)
     #roll the new dice
     hand = roll_white_dice(dice_to_roll)
     crow_die = roll_crow_die()
 
-    print("new white dice", hand)
-    print("crow die", crow_die)
-    print("locked dice", locked_dice)
+    print("New white dice", hand)
+    print("now here's the kicker")
+    time.sleep(4)
+    print("Crow die", crow_die)
+    print("Locked dice", locked_dice)
 
     #build the crow rule
 
