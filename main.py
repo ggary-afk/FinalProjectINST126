@@ -1,18 +1,19 @@
-#Build the dice machine
-
-#Import random module to give us our random number 
+#Importe random module to give us our random number 
 
 import random
 import time
 import matplotlib.pyplot as plt
+#Created a dice roller
 def roll_white_dice(amount):
     rolls=[]
     for i in range(amount):
         roll = random.randint(1,12)
         rolls.append(roll)
     return rolls
+#Created a crow dice roller
 def roll_crow_die():
     return random.randint(1,12)
+#Created a roller
 def check_for_sets(current_dice):
     print(f"Checking for Sets in: {current_dice}")
 
@@ -20,7 +21,7 @@ def check_for_sets(current_dice):
     for die in current_dice:
         if die == 12:
             wild_count = wild_count + 1
-            
+#Check for sets            
     found_valid_set = False
     for number_check in range(1, 12):
         count_for_number = 0
@@ -33,6 +34,7 @@ def check_for_sets(current_dice):
             found_valid_set = True
     if found_valid_set == False:
         print("No valid sets found")
+#Check for runs
 def check_for_runs(current_dice):
     print(f"Checking for Runs 9 in {current_dice}")
 
@@ -68,7 +70,7 @@ def check_for_runs(current_dice):
             found_run = True
     if found_run ==  False:
         print("No runs found")
-
+#Made a graph for the player
 def final_score_graph(final_hand):
     print("Final scoresheet")
     counts = [0] * 13
@@ -115,8 +117,7 @@ while roll_count <4:
 
         has_scored = True
         break
-    #locking dice
-    #show the user their hand
+#locking dice
 
     user_lock = input("You have to lock at least one die Which dice would you like to lock? Type the position of the dice in your hand like 1 or 2:")
     for position in user_lock.split():
@@ -142,7 +143,7 @@ while roll_count <4:
     #roll the new dice
     hand = roll_white_dice(dice_to_roll)
     crow_die = roll_crow_die()
-
+#print messages
     print("\nNew white dice", hand)
     print("\nnow here's the kicker")
     time.sleep(3)
@@ -167,7 +168,7 @@ while roll_count <4:
     print("Your remaining white dice", hand)
     #update the count
     roll_count = roll_count + 1
-
+#check scoring
 if has_scored == False: 
     print('End of turn, score is:')
     all_dice = hand + locked_dice
