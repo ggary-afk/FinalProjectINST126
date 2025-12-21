@@ -177,17 +177,3 @@ if has_scored == False:
     check_for_runs(all_dice)
 all_dice = hand + locked_dice
 final_score_graph(all_dice)
-=======
-#Build the dice machine
-
-#Import random module to give us our random number 
-
-import random
-
-def roll_white_dice(amount):
-    return [random.randint(1,12) for _ in range(amount)]
-
-def roll_crow_die():
-    return random.randint(1,12) 
-    
->>>>>>> ed17f6eafb2d3bedd36564e66e1f2ee55b5b2f66
